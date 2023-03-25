@@ -1,1 +1,7 @@
-package go_gpt_backend
+package main
+
+import "fmt"
+
+func main() {
+    fmt.Println("Hello, World!")
+}
