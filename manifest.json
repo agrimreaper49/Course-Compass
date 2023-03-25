@@ -1,0 +1,17 @@
+{
+  "name": "Course Compass",
+  "description": "A personal course recommender",
+  "version": "1.0",
+  "manifest_version": 3,
+  "action": {
+    "default_popup": "extension-react/build/index.html"
+},
+"content_scripts": [
+  {
+    "matches": ["https://sisuva.admin.virginia.edu/*"],
+    "js": ["content-script.js"]
+  }
+]
+}
+
+
