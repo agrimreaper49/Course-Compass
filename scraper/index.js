@@ -4,7 +4,7 @@ const express = require("express");
 const app = express();
 const { ChatGPT } = require('chatgpt-wrapper')
 
-app.get("/", async (req, res) => {
+app.post("/", async (req, res) => {
   const browser = await puppeteer.launch({
     args: ["--no-sandbox", "--disable-setuid-sandbox"],
     headless: true,
