@@ -6,7 +6,26 @@ app.use(express.json());
 app.use(express.urlencoded());
 const { ChatGPT } = require('chatgpt-wrapper')
 
-app.post("/", async (req, res) => {
+let cookies = null;
+
+let counter = 0;
+
+app.post("/setCookies", async (req, res) => {
+    cookies = req.body;
+    console.log(cookies);
+    res.send("Saved cookies")
+});
+
+app.get("/getInfo", async (req, res) => {
+  if(cookies == null) {
+    res.send("loading...")
+    return;
+  }
+  if(counter == 1)
+  {
+    res.send("Already sent!")
+    return;
+  }
   const browser = await puppeteer.launch({
     args: ["--no-sandbox", "--disable-setuid-sandbox"],
     headless: true,
@@ -22,11 +41,6 @@ const uva_advisor_link = "https://sisuva.admin.virginia.edu/psp/ihprd/UVSS/SA/s/
   const page = await browser.newPage();
 
   await page.goto(uva_sis_link);
-
-  let cookies = req.body;
-
-  console.log("one time")
-  console.log(cookies)
 
   for (let i = 0; i < cookies.length; i++) {
   await page.setCookie(cookies[i]);
@@ -104,6 +118,7 @@ const uva_advisor_link = "https://sisuva.admin.virginia.edu/psp/ihprd/UVSS/SA/s/
     try {
       const answer = await chat.send(prompt);
       studentInformation.response = answer
+      counter++;
       res.json(studentInformation);
     } catch (err) {
       console.log(err);
