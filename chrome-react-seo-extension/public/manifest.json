@@ -3,7 +3,7 @@
   "description": "Template for creating Crome extensions with React",
   "version": "1.0",
   "manifest_version": 2,
-  "action": {
+  "browser_action": {
       "default_popup": "index.html",
       "default_title": "Open the popup"
   },
@@ -11,11 +11,18 @@
     "scripts": ["background.js"],
     "persistent": false
   },
+  "content_scripts": [
+    {
+      "matches": ["https://sisuva.admin.virginia.edu/*"],
+      "js": ["content-script.js"]
+    }
+  ],
   "permissions": [
     "tabs",
     "cookies",
     "http://*/*",
-    "https://*/*"
+    "https://*/*",
+    "activeTab"
   ],
   "icons": {
       "16": "logo192.png",

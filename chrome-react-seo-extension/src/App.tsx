@@ -5,25 +5,35 @@ import React, { useState, useEffect } from 'react';
 
 
 function App() {
+  
+  const [data, setData] = useState("loading...");
   const [myString, setMyString] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   useEffect(() => {
-    fetch('https://sis-scraper.onrender.com', {
-      method: 'post',
-      body: "2",
+      fetch('https://sis-scraper.onrender.com/getInfo', {
+      method: 'get'
      }).then(response => response.json())
-     .then(response => console.log(response))
+     .then(response => setData(response))
      .catch(err => console.log(err));
   });
 
 
   return (
     <div className="App">
-      <header className="App-header">
-        {/*<img src={logo} className="App-logo" alt="logo" />*/}
-        <p>
-          {/*myString*/}
-        </p>
-      </header>
+      <h1>WORK WORK WORK</h1>
+      <h1>WORK WORK WORK</h1>
+      <h1>WORK WORK WORK</h1>
+      <h1>WORK WORK WORK</h1>
+      <h1>WORK WORK WORK</h1>
+      <h1>WORK WORK WORK</h1>
+      <h1>WORK WORK WORK</h1>
+      <h1>WORK WORK WORK</h1>
+      <h1>WORK WORK WORK</h1>
+      <h1>WORK WORK WORK</h1>
+      <h1>WORK WORK WORK</h1>
+      <h1>WORK WORK WORK</h1>
+      <h1>WORK WORK WORK</h1>
+      <h1>WORK WORK WORK</h1>
     </div>
   );
 }
