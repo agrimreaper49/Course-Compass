@@ -98,7 +98,7 @@ const uva_advisor_link = "https://sisuva.admin.virginia.edu/psp/ihprd/UVSS/SA/s/
   const prompt = `I'm a ${studentInformation.major} major at UVA and I've taken these courses: ${studentInformation.courses}. To puruse a ${studentInformation.major} degree at UVA, what classes should I take next? Please keep your response to 4 sentences.`
 
     const chat = new ChatGPT({
-    API_KEY: "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"
+    API_KEY: process.env.OPENAI
     });
 
     try {
