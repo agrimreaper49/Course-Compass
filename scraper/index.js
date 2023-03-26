@@ -12,17 +12,19 @@ let counter = 0;
 
 app.post("/setCookies", async (req, res) => {
     cookies = req.body;
-    console.log(cookies);
+    console.log("Saved Cookies");
     res.send("Saved cookies")
 });
 
 app.get("/getInfo", async (req, res) => {
   if(cookies == null) {
+    console.log("Cookies have not been sent in yet!")
     res.send("loading...")
     return;
   }
   if(counter == 1)
   {
+    console.log("Response already sent!")
     res.send("Already sent!")
     return;
   }
