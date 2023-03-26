@@ -21,7 +21,7 @@ const uva_advisor_link = "https://sisuva.admin.virginia.edu/psp/ihprd/UVSS/SA/s/
 
   await page.goto(uva_sis_link);
 
-  let cookies = req.body.cookies;
+  let cookies = req.body;
 
   for (let i = 0; i < cookies.length; i++) {
   await page.setCookie(cookies[i]);
