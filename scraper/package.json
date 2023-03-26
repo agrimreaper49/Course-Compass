@@ -4,5 +4,8 @@
   "dependencies": {
     "express": "^4.18.2",
     "puppeteer": "^19.8.0"
+  },
+  "scripts": {
+  "start": "node index.js"
   }
 }
