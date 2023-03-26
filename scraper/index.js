@@ -17,6 +17,7 @@ app.post("/setCookies", async (req, res) => {
 });
 
 app.get("/getInfo", async (req, res) => {
+  console.log("Get info endpoint was hit!")
   if(cookies == null) {
     console.log("Cookies have not been sent in yet!")
     res.send("loading...")
