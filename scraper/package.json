@@ -1,7 +1,8 @@
 {
+  "name": "scrapeSis",
+  "main": "SisScraper.js",
   "dependencies": {
-    "puppeteer": "^19.8.0"
-  },
-
-  "type": "module"
+    "chrome-aws-lambda": "^10.1.0",
+    "puppeteer-core": "^10.4.0"
+  }
 }
