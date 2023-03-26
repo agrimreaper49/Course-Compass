@@ -2,7 +2,7 @@ require("dotenv").config();
 const puppeteer = require("puppeteer");
 const express = require("express");
 const app = express();
-
+const { ChatGPT } = require('chatgpt-wrapper')
 
 app.get("/", async (req, res) => {
   const browser = await puppeteer.launch({
@@ -82,14 +82,26 @@ const uva_advisor_link = "https://sisuva.admin.virginia.edu/psp/ihprd/UVSS/SA/s/
     "name": studentName,
     "major": major,
     "advisorEmail": email,
-    "courses": coursesTakenList
+    "courses": coursesTakenList,
+    "response": ""
   }
 
-  console.log(studentInformation);
-
-  res.json(studentInformation);
-
   await browser.close();
+  
+  const prompt = `I'm a ${studentInformation.major} major at UVA and I've taken these courses: ${studentInformation.courses}. To puruse a ${studentInformation.major} degree at UVA, what classes should I take next? Please keep your response to 4 sentences.`
+
+    const chat = new ChatGPT({
+    API_KEY: "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"
+    });
+
+    try {
+      const answer = await chat.send(prompt);
+      studentInformation.response = answer
+      res.json(studentInformation);
+    } catch (err) {
+      console.log(err);
+    }
+
 });
 
 app.listen(process.env.PORT || 3000, () => {
