@@ -1,4 +1,5 @@
-FROM node:18
+FROM node:latest
+
 FROM ghcr.io/puppeteer/puppeteer:19.7.2
 
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
@@ -6,7 +7,12 @@ ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
 
 WORKDIR /usr/src/app
 
-COPY package*.json ./
-RUN npm i
-COPY . .
-CMD [ "node", "index.js" ]
+COPY package.json .
+
+RUN npm install
+
+COPY . ./
+
+EXPOSE 3000
+
+CMD [ “npm”, “start” ] 
