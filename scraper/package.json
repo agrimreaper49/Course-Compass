@@ -3,6 +3,7 @@
   "main": "index.js",
   "dependencies": {
     "chatgpt-wrapper": "^1.1.2",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "puppeteer": "^19.7.2"

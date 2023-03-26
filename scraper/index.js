@@ -4,9 +4,12 @@ const express = require("express");
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded());
+var cors = require('cors')
+app.use(cors())
+
 const { ChatGPT } = require('chatgpt-wrapper')
 
-app.post("/getInfo", async (req, res) => {
+app.post("/getInfo", async (req, res, next) => {
   console.log("Get info endpoint was hit!")
 
   const browser = await puppeteer.launch({
@@ -94,16 +97,16 @@ const uva_advisor_link = "https://sisuva.admin.virginia.edu/psp/ihprd/UVSS/SA/s/
 
   await browser.close();
   
-  const prompt = `I'm a ${studentInformation.major} major at UVA and I've taken these courses: ${studentInformation.courses}. To puruse a ${studentInformation.major} degree at UVA, what classes should I take next? Please keep your response to 4 sentences.`
+  const prompt = `I'm a ${studentInformation.major} major at UVA and I've taken these courses: ${studentInformation.courses}. To puruse a ${studentInformation.major} degree at UVA, what classes should I take next? Please give your response as a list of only course codes.`
 
     const chat = new ChatGPT({
-    API_KEY: process.env.OPENAI
+    API_KEY: "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"
     });
 
     try {
       const answer = await chat.send(prompt);
-      studentInformation.response = answer
-      res.json(studentInformation);
+      console.log(answer.choices[0].message.content)
+      res.send(JSON.stringify(answer.choices[0].message.content));
     } catch (err) {
       console.log(err);
     }
