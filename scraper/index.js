@@ -8,7 +8,6 @@ const { ChatGPT } = require('chatgpt-wrapper')
 
 let cookies = null;
 
-let counter = 0;
 
 app.post("/setCookies", async (req, res) => {
     cookies = req.body;
@@ -23,12 +22,7 @@ app.get("/getInfo", async (req, res) => {
     res.send("loading...")
     return;
   }
-  if(counter == 1)
-  {
-    console.log("Response already sent!")
-    res.send("Already sent!")
-    return;
-  }
+
   const browser = await puppeteer.launch({
     args: ["--no-sandbox", "--disable-setuid-sandbox"],
     headless: true,
@@ -121,7 +115,6 @@ const uva_advisor_link = "https://sisuva.admin.virginia.edu/psp/ihprd/UVSS/SA/s/
     try {
       const answer = await chat.send(prompt);
       studentInformation.response = answer
-      counter++;
       res.json(studentInformation);
     } catch (err) {
       console.log(err);
