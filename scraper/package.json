@@ -2,8 +2,9 @@
   "name": "scrapeSis",
   "main": "index.js",
   "dependencies": {
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "puppeteer": "^19.8.0"
+    "puppeteer": "^19.7.2"
   },
   "scripts": {
     "build": "npm install",
