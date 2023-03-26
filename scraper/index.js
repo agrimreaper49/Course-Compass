@@ -6,22 +6,8 @@ app.use(express.json());
 app.use(express.urlencoded());
 const { ChatGPT } = require('chatgpt-wrapper')
 
-let cookies = null;
-
-
-app.post("/setCookies", async (req, res) => {
-    cookies = req.body;
-    console.log("Saved Cookies");
-    res.send("Saved cookies")
-});
-
-app.get("/getInfo", async (req, res) => {
+app.post("/getInfo", async (req, res) => {
   console.log("Get info endpoint was hit!")
-  if(cookies == null) {
-    console.log("Cookies have not been sent in yet!")
-    res.send("loading...")
-    return;
-  }
 
   const browser = await puppeteer.launch({
     args: ["--no-sandbox", "--disable-setuid-sandbox"],
@@ -38,6 +24,8 @@ const uva_advisor_link = "https://sisuva.admin.virginia.edu/psp/ihprd/UVSS/SA/s/
   const page = await browser.newPage();
 
   await page.goto(uva_sis_link);
+
+  const cookies = req.body;
 
   for (let i = 0; i < cookies.length; i++) {
   await page.setCookie(cookies[i]);
