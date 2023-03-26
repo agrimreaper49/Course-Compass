@@ -1,4 +1,6 @@
 import openai
+import os
+from flask import Flask, jsonify
 
 major = ""
 courses = ""
@@ -10,10 +12,16 @@ response = openai.ChatCompletion.create(
             {"role": "user", "content": f"I'm a {major} major at UVA and I've taken these courses: {courses}. Recomend classes I should take next"},
         ]
 )
-
-
 result = ''
 for choice in response.choices:
     result += choice.message.content
 
-print(result)
+app = Flask(__name__)
+@app.route('/string')
+def get_string():
+    my_string = "Hello from Python!"
+    return jsonify({'string': my_string})
+
+if __name__ == '__main__':
+    app.run()
+
