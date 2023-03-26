@@ -1,4 +1,4 @@
-FROM node:18-alpine
+FROM node:18
 FROM ghcr.io/puppeteer/puppeteer:19.7.2
 
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
@@ -7,6 +7,6 @@ ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
 WORKDIR /usr/src/app
 
 COPY package*.json ./
-RUN npm ci --force
+RUN npm i
 COPY . .
 CMD [ "node", "index.js" ]
