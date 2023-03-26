@@ -2,6 +2,8 @@ require("dotenv").config();
 const puppeteer = require("puppeteer");
 const express = require("express");
 const app = express();
+app.use(express.json());
+app.use(express.urlencoded());
 const { ChatGPT } = require('chatgpt-wrapper')
 
 app.post("/", async (req, res) => {
@@ -22,6 +24,9 @@ const uva_advisor_link = "https://sisuva.admin.virginia.edu/psp/ihprd/UVSS/SA/s/
   await page.goto(uva_sis_link);
 
   let cookies = req.body;
+
+  console.log("one time")
+  console.log(cookies)
 
   for (let i = 0; i < cookies.length; i++) {
   await page.setCookie(cookies[i]);
@@ -86,12 +91,14 @@ const uva_advisor_link = "https://sisuva.admin.virginia.edu/psp/ihprd/UVSS/SA/s/
     "response": ""
   }
 
+  console.log(studentInformation)
+
   await browser.close();
   
   const prompt = `I'm a ${studentInformation.major} major at UVA and I've taken these courses: ${studentInformation.courses}. To puruse a ${studentInformation.major} degree at UVA, what classes should I take next? Please keep your response to 4 sentences.`
 
     const chat = new ChatGPT({
-    API_KEY: "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"
+    API_KEY: "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"
     });
 
     try {
