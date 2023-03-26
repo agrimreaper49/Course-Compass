@@ -8,16 +8,26 @@ import axios from 'axios';
 
 function App() {
   const [myString, setMyString] = useState<string>('');
+  // useEffect(() => {
+  //   console.log("Hello")
+  //   axios.get('http://127.0.0.1:5000/string')
+  //     .then((response: { data: { string: string } }) => {
+  //       setMyString(response.data.string);
+  //     })
+  //     .catch(error => {
+  //       console.log(error);
+  //     });
+  //     console.log(myString)
+  // }, []);
   useEffect(() => {
-    axios.get('http://localhost:5000/string')
-      .then((response: { data: { string: string } }) => {
-        setMyString(response.data.string || '');
-      })
-      .catch(error => {
-        console.log(error);
+    fetch("http://127.0.0.1:5000/string")
+      .then((res) => res.json())
+      .then((res) => {
+        setMyString(res.string);
+        console.log("!!!!", myString )
       });
-      console.log(myString)
   }, []);
+
 
   return (
     <div className="App">

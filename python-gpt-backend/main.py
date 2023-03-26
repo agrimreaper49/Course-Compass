@@ -19,7 +19,8 @@ for choice in response.choices:
 app = Flask(__name__)
 @app.route('/string')
 def get_string():
-    my_string = "Hello from Python!"
+    my_string = result
+    print(my_string)
     return jsonify({'string': my_string})
 
 if __name__ == '__main__':
